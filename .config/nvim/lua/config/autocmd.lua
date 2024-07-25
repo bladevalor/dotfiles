@@ -10,7 +10,7 @@ autocmd("TextYankPost", {
 })
 
 if hostname == "kara" then
-	vim.cmd.colorscheme("bamboo")
+   vim.cmd.colorscheme("bamboo")
 else
    vim.cmd.colorscheme("sonokai")
 end
