@@ -36,7 +36,7 @@ opt.cursorline = true
 
 -- appearance
 opt.termguicolors = true
-opt.background = "dark"
+opt.background = "light"
 opt.signcolumn = 'yes' --shows notification icons(eg. git changes, line errors, etc) in the gutter
 
 -- Dont show the status mode, this info is already in the statusline

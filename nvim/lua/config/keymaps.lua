@@ -50,6 +50,7 @@ keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope
 keymap.set("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "telescope find in current buffer" })
 keymap.set("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
 keymap.set("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+keymap.set("n", "<leader>th", "<cmd>Telescope colorscheme<CR>", { desc = "telescope color schemes" })
 
 -- conform
 keymap.set("n", "<leader>fm", function()
