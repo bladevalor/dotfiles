@@ -133,6 +133,7 @@ return {
          rust_analyzer = {},
          emmet_language_server = {},
          pyright = {},
+         zls = {},
       }
 
       require("mason").setup()
