@@ -1,0 +1,46 @@
+(defcfg
+   log-layer-changes no
+)   
+
+(defsrc
+   grv   1    2    3    4    5    6    7    8    9    0    -    =    bspc
+   tab   q    w    e    r    t    y    u    i    o    p    [    ]    \
+   caps  a    s    d    f    g    h    j    k    l    ;    '    ret
+   lsft  z    x    c    v    b    n    m    ,    .    /    rsft
+   lctl  lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayermap (num)
+   k  @lol
+   j  @ccc
+;;   p  @int
+   caps @cap
+)
+
+(defalias
+   :  S-;   ;; semicolon
+   8  8     ;; figure 8
+   0  0     ;; figure 0
+
+   ;; local host macro
+   lch   (macro h t t p @: / / l o c a l h o s t @: @8 @0 @0 @0)
+   lol   (tap-hold 2 200 k @lch)
+   ccc   (tap-hold 2 200 j (macro r i c h a r d S-(e i n s t e i n e)))
+   ;; tap for escape, hold for left ctl
+   cap   (tap-hold 20 200 esc lctl)
+)
+
+(defvirtualkeys 
+   dotcom (macro . c o m)
+   dotorg (macro . o r g)
+
+)
+
+(defseq
+   dotcom (. S-3)
+   dotorg (. S-4)
+)
+
+(defalias
+   int (tap-hold 2 200 sldr p)
+)
