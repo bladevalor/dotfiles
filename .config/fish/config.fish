@@ -13,4 +13,5 @@ function reload
    source ~/.config/fish/config.fish
 end
 
+fzf --fish | source
 starship init fish | source
