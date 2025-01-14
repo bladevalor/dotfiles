@@ -23,7 +23,7 @@ opt.whichwrap:append "<>[]hl"
 -- line wraping
 opt.wrap = false
 
--- search settings 
+-- search settings
 opt.ignorecase = true
 opt.smartcase = true
 
@@ -36,7 +36,7 @@ opt.cursorline = true
 
 -- appearance
 opt.termguicolors = true
-opt.background = "light"
+opt.background = "dark"
 opt.signcolumn = 'yes' --shows notification icons(eg. git changes, line errors, etc) in the gutter
 
 -- Dont show the status mode, this info is already in the statusline
@@ -48,9 +48,8 @@ opt.inccommand = 'split'
 -- configure backspace behaviour
 opt.backspace = "indent,eol,start" -- backspace can delete: autoindets, last char of a line or start of insert position
 
--- clipboard: use the sys clipboard when copying/yanking 
+-- clipboard: use the sys clipboard when copying/yanking
 opt.clipboard:append("unnamedplus")
 
 -- split windows
 opt.splitright = true
-
