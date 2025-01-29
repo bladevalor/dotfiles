@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export --path PKG_CONFIG_PATH:/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig
-SETUVAR __fish_initialized:3800
+SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_L:\x2d\x2dposition\x20anywhere\x20\x2d\x2dset\x2dcursor\x20\x25\x20\x7c\x20less
 SETUVAR _fish_abbr_dotdot:\x2d\x2dregex\x20\x5e\x5c\x2e\x5c\x2e\x2b\x24\x20\x2d\x2dfunction\x20multicd
 SETUVAR _fish_abbr_gst:git\x20status
