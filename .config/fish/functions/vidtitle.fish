@@ -7,7 +7,7 @@ function vidtitle
       return 1
    end
 
-   for file in (fdfind -e $argv[1])
+   for file in (fd -e $argv[1])
       echo $file
       if test $argv[1] = "mkv"
          mkvpropedit $file -e info -s title=(basename $file)
