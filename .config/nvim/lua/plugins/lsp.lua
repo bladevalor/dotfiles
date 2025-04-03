@@ -12,9 +12,10 @@ local servers = {
    "glsl_analyzer"
 }
 
-return {
+local lsp = {
    "neovim/nvim-lspconfig",
    dependencies = {
+      "saghen/blink.cmp",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "folke/neodev.nvim",
@@ -50,3 +51,5 @@ return {
       }
    end
 }
+
+return lsp

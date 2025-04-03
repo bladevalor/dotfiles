@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export --path PKG_CONFIG_PATH:/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig\x1e/usr/lib/x86_64\x2dlinux\x2dgnu/pkgconfig
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR _fish_abbr_L:\x2d\x2dposition\x20anywhere\x20\x2d\x2dset\x2dcursor\x20\x25\x20\x7c\x20less
 SETUVAR _fish_abbr_dotdot:\x2d\x2dregex\x20\x5e\x5c\x2e\x5c\x2e\x2b\x24\x20\x2d\x2dfunction\x20multicd
 SETUVAR _fish_abbr_gst:git\x20status
@@ -35,4 +35,4 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:normal\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
-SETUVAR fish_user_paths:/home/einsteine/\x2ecargo/bin\x1e/opt/zig\x2d0\x2e14\x2e0\x2ddev\x1e/opt/node\x2dv20\x2e15\x2e1/bin\x1e/home/homer\x2ds/\x2elocal/bin
+SETUVAR fish_user_paths:/opt/gmsh\x2d4\x2e13\x2e1\x2dLinux64/bin\x1e/home/einsteine/\x2ecargo/bin\x1e/opt/zig\x2d0\x2e14\x2e0\x2ddev\x1e/opt/node\x2dv20\x2e15\x2e1/bin\x1e/home/homer\x2ds/\x2elocal/bin

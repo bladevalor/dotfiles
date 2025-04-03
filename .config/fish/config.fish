@@ -9,6 +9,10 @@ function ks
    exa -a $argv
 end
 
+function nv
+   nvim $argv
+end
+
 function reload
    source ~/.config/fish/config.fish
 end

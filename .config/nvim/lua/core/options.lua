@@ -53,3 +53,6 @@ opt.clipboard:append("unnamedplus")
 
 -- split windows
 opt.splitright = true
+
+-- rounded corners for hover documentation(done by pressing "K" in normal mode)
+opt.winborder = "rounded"

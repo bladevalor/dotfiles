@@ -11,6 +11,7 @@ return {
    },
    opts = {
       defaults = {
+         border = false,
          file_ignore_patterns = {
             "target/",
          },
