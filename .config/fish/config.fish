@@ -24,10 +24,6 @@ function nv
    nvim $argv
 end
 
-function lv
-   env NVIM_APPNAME=nvim-lazy nvim $argv
-end
-
 function av
    env NVIM_APPNAME=nvim-astro nvim $argv
 end
