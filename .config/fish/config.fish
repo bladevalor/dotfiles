@@ -8,32 +8,28 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 set -Ux DEEPSEEK_API_KEY sk-b73defc36a794152948038c96ae5e1ae
 
-set -Ux ARDMK_DIR "/opt/Arduino-Makefile"
+set -Ux ARDMK_DIR /opt/Arduino-Makefile
 set -Ux ARDUINO_DIR ""
 set -Ux AVR_TOOLS_DIR ""
 
 function x
-   xdg-open $argv
+    xdg-open $argv
 end
 
 function ks
-   exa -a $argv
+    exa -a $argv
 end
 
 function nv
-   nvim $argv
-end
-
-function av
-   env NVIM_APPNAME=nvim-astro nvim $argv
+    nvim $argv
 end
 
 function xo
-   xdg-open $argv
+    xdg-open $argv
 end
 
 function reload
-   source ~/.config/fish/config.fish
+    source ~/.config/fish/config.fish
 end
 
 fzf --fish | source
