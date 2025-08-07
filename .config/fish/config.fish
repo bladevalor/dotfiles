@@ -8,9 +8,9 @@ abbr --add dotdot --regex '^\.\.+$' --function multicd
 
 set -Ux DEEPSEEK_API_KEY sk-b73defc36a794152948038c96ae5e1ae
 
-set -Ux ARDMK_DIR /opt/Arduino-Makefile
-set -Ux ARDUINO_DIR ""
-set -Ux AVR_TOOLS_DIR ""
+set -Ux CHROME_EXECUTABLE /usr/bin/google-chrome-stable
+set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk/
+set -Ux ANDROID_SDK_ROOT /opt/android-sdk
 
 function x
     xdg-open $argv
