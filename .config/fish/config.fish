@@ -36,6 +36,11 @@ function reload
     source ~/.config/fish/config.fish
 end
 
+function glacier
+    cd /opt/android-sdk/tools/
+    emulator @glacier -netdelay none -netspeed full -gpu on -memory 4096 -cores 4 -feature KeyboardSupport
+end
+
 fzf --fish | source
 zoxide init fish | source
 starship init fish | source
