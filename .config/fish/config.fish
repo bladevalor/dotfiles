@@ -24,6 +24,10 @@ function nv
     nvim $argv
 end
 
+function lg
+    lazygit $argv
+end
+
 function xo
     xdg-open $argv
 end
