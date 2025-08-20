@@ -1,3 +1,18 @@
+function prepend_echo
+    set_color $argv[1]
+    echo -n $argv[2]
+    set_color normal
+    echo $argv[3..-1]
+end
+
+function seconds_to_hms
+    set -l total_seconds $argv[1]
+    set -l h (math "floor($total_seconds / 3600)")
+    set -l m (math "floor(($total_seconds % 3600) / 60)")
+    set -l s (math "$total_seconds % 60")
+    echo "$h:$m:$s"
+end
+
 function splice_vids_to_chapters
     set vidfile $argv
 
@@ -32,22 +47,7 @@ function splice_vids_to_chapters
                 -to (seconds_to_hms "$end_time") \
                 -c copy \
                 "$folder/$new_title$extension"
+
             sleep 1
         end
-end
-
-function prepend_echo
-    set_color $argv[1]
-    echo -n $argv[2]
-    set_color normal
-    echo $argv[3..-1]
-end
-
-function seconds_to_hms
-    set -l total_seconds $argv[1]
-    set -l h (math "$total_seconds / 3600")
-    set -l remaining_seconds (math "$total_seconds % 3600")
-    set -l m (math "$remaining_seconds / 60")
-    set -l s (math "$remaining_seconds % 60")
-    echo "$h:$m:$s"
 end
