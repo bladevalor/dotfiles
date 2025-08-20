@@ -28,7 +28,7 @@ function splice_vids_to_chapters
     set vidfile $argv
 
     if test ! -f "$vidfile"
-        echo -e "This file does not exist:\n\t" "$vidfile"
+        prepend_echo ff0000 "no such file:   " "$vidfile"
         return 1
     end
 
@@ -42,23 +42,21 @@ function splice_vids_to_chapters
     if test ! -d "$folder"
         mkdir "$folder"
     else
-        echo -e "This folder already exists\n\t" "$folder"
+        prepend_echo ff0000 "no such folder:   " "$folder"
         return 1
     end
 
     ffprobe -v 0 -i "$vidfile" -show_chapters -of compact=nokey=1 |
-        cut -d "|" -f "5,7,8" |
+        awk -F '|' '{split($5,a, "."); split($7,b,"."); print a[1]"|"b[1]"|"$8}' |
         while IFS="|" read start_time end_time chapter_title
-            set new_title (string replace -r '[Cc]hapter ' '' "$chapter_title")
-            prepend_echo 00ff00 "CREATING: " "$new_title"
-
+            set -l clean_title (sanitize_title $chapter_title)
+            prepend_echo 00ff00 "CREATING: " "$clean_title"
             ffmpeg -i "$vidfile" \
                 -v 0 \
                 -ss (seconds_to_hms "$start_time") \
                 -to (seconds_to_hms "$end_time") \
                 -c copy \
-                "$folder/$new_title$extension"
-
-            sleep 1
+                "$folder/$clean_title$extension" &
         end
+
 end
