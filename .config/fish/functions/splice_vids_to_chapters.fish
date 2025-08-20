@@ -7,9 +7,10 @@ end
 
 function seconds_to_hms
     set -l total_seconds $argv[1]
-    set -l h (math "floor($total_seconds / 3600)")
-    set -l m (math "floor(($total_seconds % 3600) / 60)")
-    set -l s (math "$total_seconds % 60")
+    set -l h (math -s 0 "$total_seconds / 3600")
+    set -l remaining_seconds (math -s 0 "$total_seconds % 3600")
+    set -l m (math -s 0 "$remaining_seconds / 60")
+    set -l s (math -s 0 "$remaining_seconds % 60")
     echo "$h:$m:$s"
 end
 
