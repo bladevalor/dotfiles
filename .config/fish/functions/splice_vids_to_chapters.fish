@@ -14,6 +14,16 @@ function seconds_to_hms
     echo "$h:$m:$s"
 end
 
+function sanitize_title
+    set -l title $argv[1]
+
+    # Remove characters not allowed or problematic in filenames:
+    # These include: / \ ? % * : | " < > .
+    set title (string replace -r '[\/\\\?\%\*\:\|\"<>\r\n\t]' '' $title)
+
+    echo $title
+end
+
 function splice_vids_to_chapters
     set vidfile $argv
 
