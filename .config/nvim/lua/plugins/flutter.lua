@@ -7,5 +7,12 @@ return {
       "stevearc/dressing.nvim", -- optional for vim.ui.select
     },
     config = true,
+    keys = {
+      {
+        "<leader>tl",
+        "<cmd>FlutterLogToggle<cr>",
+        desc = "Toggle flutter logs",
+      },
+    },
   },
 }
