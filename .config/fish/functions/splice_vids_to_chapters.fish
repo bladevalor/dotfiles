@@ -46,17 +46,22 @@ function splice_vids_to_chapters
         return 1
     end
 
+    set iter 1
+
     ffprobe -v 0 -i "$vidfile" -show_chapters -of compact=nokey=1 |
         awk -F '|' '{split($5,a, "."); split($7,b,"."); print a[1]"|"b[1]"|"$8}' |
         while IFS="|" read start_time end_time chapter_title
             set -l clean_title (sanitize_title $chapter_title)
-            prepend_echo 00ff00 "CREATING: " "$clean_title"
+            set -l index (printf "%02d" $iter)
+            prepend_echo 00ff00 "CREATING: " "$index. $clean_title"
             ffmpeg -i "$vidfile" \
                 -v 0 \
                 -ss (seconds_to_hms "$start_time") \
                 -to (seconds_to_hms "$end_time") \
                 -c copy \
-                "$folder/$clean_title$extension" &
+                "$folder/$index. $clean_title$extension" &
+            set iter (math $iter + 1)
         end
+    set iter 1
 
 end
