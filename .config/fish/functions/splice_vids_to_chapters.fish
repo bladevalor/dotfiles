@@ -38,6 +38,12 @@ function splice_vids_to_chapters
         return 1
     end
 
+    set chapters_exist (ffprobe -v 0 -show_chapters $vidfile)
+    if test -z "$chapters_exist"
+        prepend_echo ff0000 "no chapters found in file: " "$vidfile"
+        return 0
+    end
+
     set folder (path basename -E $vidfile)
     if test ! -d "$folder"
         mkdir "$folder"
