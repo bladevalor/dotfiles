@@ -1,30 +1,18 @@
 -- This file defines a custom command and keymap to run the current
 -- project's Makefile or the currently open file.
---
--- To use this, save it as a file like 'run_project.lua' in your
--- 'lua' directory (e.g., ~/.config/nvim/lua/run_project.lua)
--- and then 'require' it in your init.lua:
---
--- require('run_project')
 
--- A helper function to find the project root.
--- It searches for common root markers like a .git directory or a Makefile.
 local function get_project_root()
-  -- Get the current working directory
   local cwd = vim.fn.getcwd()
 
   -- Search for a root marker up the directory tree
-  -- We'll look for a '.git' directory or a 'Makefile'
-  local root = vim.fs.find({ "Makefile", ".git" }, {
+  local root = vim.fs.find({ "Makefile", ".git", "CMakeLists.txt" }, {
     up = true,
     stop = cwd,
   })[1]
 
-  -- Return the directory of the found file, or the current directory if none is found.
   return root and vim.fs.dirname(root) or cwd
 end
 
--- A helper function to execute a command in a new terminal buffer.
 local function run_in_terminal(command, options)
   options = options or {}
   local cmd = "silent term " .. command
@@ -33,7 +21,7 @@ end
 
 -- Define the main logic for our custom command.
 local function run_project()
-  local root_dir = vim.fn.getcwd()
+  local root_dir = get_project_root()
   print(root_dir)
   local current_file = vim.api.nvim_buf_get_name(0)
 
@@ -41,6 +29,17 @@ local function run_project()
   if vim.fn.filereadable(root_dir .. "/Makefile") ~= 0 then
     print("Running make in project root...")
     run_in_terminal("make -C " .. root_dir)
+  elseif vim.fn.filereadable(root_dir .. "/CMakeLists.txt") ~= 0 then
+    print("Running CMake build...")
+    local build_dir = root_dir .. "/build"
+    vim.fn.mkdir(build_dir, "p")
+
+    local cmake_setup = "cmake -S " .. root_dir .. " -B " .. build_dir
+    local cmake_build = "cmake --build " .. build_dir
+    local cmake_run = build_dir .. "/bin/pocket"
+    local run_command = cmake_setup .. " && " .. cmake_build .. " && " .. cmake_run
+
+    run_in_terminal(run_command)
   else
     -- If no Makefile, try to run the current file based on its extension
     local run_command
@@ -75,12 +74,9 @@ local function run_project()
   end
 end
 
--- Create the user command :RunProject
--- The {} at the end is for command options, which we don't need here.
 vim.api.nvim_create_user_command("RunProject", run_project, {})
 
 -- Create a keymap for convenience.
--- We'll map it to <leader>r (e.g., \r by default).
 vim.keymap.set("n", "<leader>r", ":RunProject<CR>", {
   noremap = true,
   silent = true,
