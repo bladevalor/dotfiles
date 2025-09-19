@@ -1,10 +1,9 @@
 -- This file defines a custom command and keymap to run the current
 -- project's Makefile or the currently open file.
 
-local function get_project_root()
+local get_project_root = function()
   local cwd = vim.fn.getcwd()
 
-  -- Search for a root marker up the directory tree
   local root = vim.fs.find({ "Makefile", ".git", "CMakeLists.txt" }, {
     up = true,
     stop = cwd,
@@ -13,10 +12,45 @@ local function get_project_root()
   return root and vim.fs.dirname(root) or cwd
 end
 
-local function run_in_terminal(command, options)
+local run_in_terminal = function(command, options)
   options = options or {}
   local cmd = "silent term " .. command
   vim.cmd(cmd)
+end
+
+-- Handle CMake projects
+local CMake_runner = function(root_dir)
+  local build_dir = root_dir .. "/build"
+  vim.fn.mkdir(build_dir, "p")
+
+  -- cmake terminal/console commands
+  local cmake_build = "cmake --build " .. build_dir
+
+  -- build and redirect errors to quickfix List
+  local output_file = vim.fn.tempname()
+  vim.fn.system(cmake_build .. " 2> " .. output_file)
+  local custom_error_formart = {
+    [[%f:%l:%c:\ %m,]],
+    [[%E%f:%l:%c:\ error:\ %m,]],
+    [[%E%f:%l:%c:\ fatal\ error:\ %m,]],
+    [[%-G%.%#]],
+  }
+
+  vim.cmd("setlocal errorformat=" .. table.concat(custom_error_formart)) -- INFO: set errorformat
+  vim.cmd("cfile " .. output_file)
+  vim.cmd("setlocal errorformat&") -- INFO: reset set errorformat
+
+  -- check quickfix List for errors
+  local qf_list = vim.fn.getqflist()
+  if #qf_list == 0 then
+    vim.cmd("cclose")
+    print("✅ Build Success")
+    run_in_terminal(build_dir .. "/bin/pocket")
+    return
+  end
+
+  print("❌ Build Fail")
+  vim.cmd("copen")
 end
 
 -- Define the main logic for our custom command.
@@ -30,16 +64,7 @@ local function run_project()
     print("Running make in project root...")
     run_in_terminal("make -C " .. root_dir)
   elseif vim.fn.filereadable(root_dir .. "/CMakeLists.txt") ~= 0 then
-    print("Running CMake build...")
-    local build_dir = root_dir .. "/build"
-    vim.fn.mkdir(build_dir, "p")
-
-    local cmake_setup = "cmake -S " .. root_dir .. " -B " .. build_dir
-    local cmake_build = "cmake --build " .. build_dir
-    local cmake_run = build_dir .. "/bin/pocket"
-    local run_command = cmake_setup .. " && " .. cmake_build .. " && " .. cmake_run
-
-    run_in_terminal(run_command)
+    CMake_runner(root_dir)
   else
     -- If no Makefile, try to run the current file based on its extension
     local run_command
