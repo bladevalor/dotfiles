@@ -1,0 +1,11 @@
+{
+  "name": "chad-custom-snippetes",
+  "contributes": {
+    "snippets": [
+      {
+        "language": "cpp",
+        "path": "./snippets/cpp.json"
+      }
+    ]
+  }
+}
