@@ -29,16 +29,18 @@ local CMake_runner = function(root_dir)
   -- build and redirect errors to quickfix List
   local output_file = vim.fn.tempname()
   vim.fn.system(cmake_build .. " 2> " .. output_file)
-  local custom_error_formart = {
-    [[%f:%l:%c:\ %m,]],
-    [[%E%f:%l:%c:\ error:\ %m,]],
-    [[%E%f:%l:%c:\ fatal\ error:\ %m,]],
-    [[%-G%.%#]],
+
+  local error_formats = {
+    "%f:%l:%c: %m",
+    "%E%f:%l:%c: error: %m",
+    "%E%f:%l:%c: fatal error: %m",
+    "%-G%.%#",
   }
 
-  vim.cmd("setlocal errorformat=" .. table.concat(custom_error_formart)) -- INFO: set errorformat
-  vim.cmd("cfile " .. output_file)
-  vim.cmd("setlocal errorformat&") -- INFO: reset set errorformat
+  vim.fn.setqflist({}, "r", {
+    efm = table.concat(error_formats, ","),
+    lines = vim.fn.readfile(output_file),
+  })
 
   -- check quickfix List for errors
   local qf_list = vim.fn.getqflist()
@@ -50,13 +52,12 @@ local CMake_runner = function(root_dir)
   end
 
   print("❌ Build Fail")
-  vim.cmd("copen")
+  vim.cmd("cfirst")
 end
 
 -- Define the main logic for our custom command.
 local function run_project()
   local root_dir = get_project_root()
-  print(root_dir)
   local current_file = vim.api.nvim_buf_get_name(0)
 
   -- Check if a Makefile exists in the project root
