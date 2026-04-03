@@ -41,6 +41,7 @@ return {
         },
       },
     },
+
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
@@ -79,5 +80,13 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+
+    config = function(_, opts)
+      require("avante").setup(opts)
+
+      require("which-key").add({
+        { "<leader>a", group = "Avante" },
+      })
+    end,
   },
 }
